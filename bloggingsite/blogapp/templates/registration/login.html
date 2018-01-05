@@ -1,0 +1,19 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h2>Must login:</h2>
+        <h3>(You are not authorized, contact site admin)</h3>
+
+        {% if form.erros %}
+            <p>Your username/password did not match. Try again!</p>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Login">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+{% endblock %}
